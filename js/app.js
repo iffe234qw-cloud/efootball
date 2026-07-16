@@ -2,7 +2,7 @@ let currentMode = 'buy';
 
 function init() {
     lucide.createIcons();
-    renderPlayers(allPlayers);
+    renderPlayers(allPlayers, false);
     renderTeams();
     initTicker();
     initCounters();
