@@ -1,8 +1,12 @@
+
 function filterPlayers() {
     const searchTerm = document.getElementById('player-search').value.toLowerCase();
     const type = document.getElementById('filter-type').value;
     const pos = document.getElementById('filter-pos').value;
     const sort = document.getElementById('sort-by').value;
+
+    // Determine if the user is actually searching/filtering or just in default state
+    const isSearching = searchTerm !== "" || type !== 'all' || pos !== 'all';
 
     let filtered = allPlayers.filter(p => {
         const matchSearch = p.name.toLowerCase().includes(searchTerm) || p.club.toLowerCase().includes(searchTerm) || p.nat.toLowerCase().includes(searchTerm);
@@ -10,11 +14,12 @@ function filterPlayers() {
         const matchPos = pos === 'all' || p.pos === pos;
         return matchSearch && matchType && matchPos;
     });
-
+    
+    // Sorting
     if(sort === 'rating-desc') filtered.sort((a, b) => b.rating - a.rating);
     if(sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
     if(sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
     if(sort === 'recent') filtered.sort((a, b) => a.id - b.id);
-
-    renderPlayers(filtered);
+    // Pass the isSearching flag to the renderer to handle the 2-row limit
+    renderPlayers(filtered, isSearching);
 }
