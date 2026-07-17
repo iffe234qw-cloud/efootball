@@ -1,0 +1,97 @@
+/* 
+   MOBILE-FIRST RESPONSIVE STRATEGY
+   Breakpoints:
+   - Small Phones: < 480px
+   - Large Phones/Tablets: 480px - 1024px
+   - Desktops: 1025px+
+*/
+
+/* --- Fluid Typography --- */
+h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); }
+h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+body { font-size: clamp(0.9rem, 2vw, 1rem); }
+
+/* --- Global Mobile Overrides --- */
+@media (max-width: 1024px) {
+    .hero-stats { 
+        grid-template-columns: 1fr; 
+        gap: 1rem; 
+    }
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero { padding: 0 1.5rem; }
+    .hero-btns { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+    .btn { width: 100%; justify-content: center; min-height: 48px; }
+    
+    /* Transform Filter Bar to Drawer */
+    .filter-trigger-btn { display: flex !important; }
+    #main-filter-bar { display: none; }
+    
+    .player-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+    .player-card {
+        padding: 1rem;
+        border-radius: 16px;
+    }
+    .player-img-container { height: 160px; }
+    .player-avatar { width: 120px; }
+    .rating-badge { font-size: 1.4rem; }
+    .player-info h3 { font-size: 1.1rem; }
+    .player-meta { flex-wrap: wrap; gap: 5px; }
+    .price-tag { font-size: 1.2rem; }
+}
+
+/* --- Filter Drawer Specifics --- */
+.filter-drawer-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+}
+.filter-drawer-overlay.active { opacity: 1; visibility: visible; }
+
+.filter-drawer {
+    position: fixed; bottom: -100%; left: 0; width: 100%; max-width: 500px;
+    margin: 0 auto; background: var(--dark-navy);
+    border-top: 2px solid var(--primary-blue);
+    border-radius: 24px 24px 0 0;
+    z-index: 2100; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; flex-direction: column; padding: 2rem;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+}
+.filter-drawer.active { transform: translateY(-100%); bottom: 0; }
+
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.drawer-body { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; }
+.filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.filter-group label { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+.drawer-footer { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; }
+
+/* --- Team Cards Responsive --- */
+.team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+@media (max-width: 480px) {
+    .team-card { padding: 1rem; }
+    .team-stats-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Footer Responsive --- */
+@media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-links { align-items: center; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+   
